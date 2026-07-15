@@ -4,13 +4,18 @@ __pycache__/
 *$py.class
 *.so
 .Python
+
 env/
 venv/
 .venv/
+
 *.egg-info/
 dist/
 build/
 *.egg
+
+.pytest_cache/
+.mypy_cache/
 
 # Node
 node_modules/
@@ -21,29 +26,24 @@ frontend/.vite/
 .env
 .env.local
 
-# Vector Store (generated artifacts)
-vector_store/fashion.index
-vector_store/product_ids.json
-vector_store/product_metadata.json
-vector_store/index_info.json
+# Generated files
+vector_store/
 
-# Models (large files)
+# ML Models
 models/*.bin
 models/*.pt
 models/*.onnx
 models/*/model-*
 
-# Data (user images)
-data/catalog/**/*.jpg
-data/catalog/**/*.jpeg
-data/catalog/**/*.png
-data/catalog/**/*.webp
+# Hugging Face cache
+.cache/
 
 # IDE
 .vscode/
 .idea/
-*.swp
-*.swo
+
+# Logs
+*.log
 
 # OS
 .DS_Store
@@ -52,6 +52,3 @@ desktop.ini
 
 # Docker
 docker-compose.override.yml
-
-# Logs
-*.log
