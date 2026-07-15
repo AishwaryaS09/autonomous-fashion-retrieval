@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./vector_store:/app/vector_store
+      - ./models:/app/models
+    environment:
+      - MODEL_NAME=patrickjohncyh/fashion-clip
+      - CATALOG_DIR=/app/data/catalog
+      - VECTOR_STORE_DIR=/app/vector_store
+      - FRONTEND_URL=http://localhost:5173
+      - TOP_K_DEFAULT=10
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_BASE_URL=http://backend:8000
+    depends_on:
+      - backend
+    restart: unless-stopped

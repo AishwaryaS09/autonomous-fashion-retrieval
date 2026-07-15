@@ -1,0 +1,86 @@
+[
+  {
+    "id": "dress_001",
+    "name": "Red Floral Dress",
+    "category": "dresses",
+    "color": "red",
+    "pattern": "floral"
+  },
+  {
+    "id": "dress_002",
+    "name": "Blue Summer Maxi Dress",
+    "category": "dresses",
+    "color": "blue",
+    "pattern": "solid"
+  },
+  {
+    "id": "shirt_001",
+    "name": "White Cotton Shirt",
+    "category": "shirts",
+    "color": "white",
+    "pattern": "solid"
+  },
+  {
+    "id": "shirt_002",
+    "name": "Navy Blue Striped Shirt",
+    "category": "shirts",
+    "color": "navy",
+    "pattern": "striped"
+  },
+  {
+    "id": "jacket_001",
+    "name": "Black Leather Jacket",
+    "category": "jackets",
+    "color": "black",
+    "pattern": "solid"
+  },
+  {
+    "id": "jacket_002",
+    "name": "Brown Denim Jacket",
+    "category": "jackets",
+    "color": "brown",
+    "pattern": "solid"
+  },
+  {
+    "id": "pants_001",
+    "name": "Blue Jeans",
+    "category": "pants",
+    "color": "blue",
+    "pattern": "solid"
+  },
+  {
+    "id": "pants_002",
+    "name": "Khaki Chinos",
+    "category": "pants",
+    "color": "beige",
+    "pattern": "solid"
+  },
+  {
+    "id": "shoes_001",
+    "name": "White Sneakers",
+    "category": "shoes",
+    "color": "white",
+    "pattern": "solid"
+  },
+  {
+    "id": "shoes_002",
+    "name": "Black Leather Boots",
+    "category": "shoes",
+    "color": "black",
+    "pattern": "solid"
+  },
+  {
+    "id": "bag_001",
+    "name": "Red Leather Handbag",
+    "category": "bags",
+    "color": "red",
+    "pattern": "solid"
+  },
+  {
+    "id": "bag_002",
+    "name": "Beige Canvas Tote",
+    "category": "bags",
+    "color": "beige",
+    "pattern": "solid"
+  }
+]

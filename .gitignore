@@ -1,0 +1,57 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Node
+node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Environment
+.env
+.env.local
+
+# Vector Store (generated artifacts)
+vector_store/fashion.index
+vector_store/product_ids.json
+vector_store/product_metadata.json
+vector_store/index_info.json
+
+# Models (large files)
+models/*.bin
+models/*.pt
+models/*.onnx
+models/*/model-*
+
+# Data (user images)
+data/catalog/**/*.jpg
+data/catalog/**/*.jpeg
+data/catalog/**/*.png
+data/catalog/**/*.webp
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Docker
+docker-compose.override.yml
+
+# Logs
+*.log
