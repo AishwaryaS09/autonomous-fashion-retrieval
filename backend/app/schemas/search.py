@@ -26,8 +26,23 @@ class SearchProduct(BaseModel):
     image_url: str
     similarity_score: float
     reranking_score: float
+    primary_color: Optional[str] = ""
+    secondary_color: Optional[str] = ""
     color: Optional[str] = ""
     pattern: Optional[str] = ""
+    style: Optional[str] = ""
+    material: Optional[str] = ""
+    fit: Optional[str] = ""
+    length: Optional[str] = ""
+    sleeve_type: Optional[str] = ""
+    neckline: Optional[str] = ""
+    footwear_type: Optional[str] = ""
+    heel_type: Optional[str] = ""
+    bag_type: Optional[str] = ""
+    occasion: Optional[str] = ""
+    season: Optional[str] = ""
+    gender: Optional[str] = ""
+    description: Optional[str] = ""
 
 
 class SearchResponse(BaseModel):

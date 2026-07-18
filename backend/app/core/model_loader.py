@@ -18,8 +18,8 @@ class ModelLoader:
         self.model_name = model_name
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         logger.info(f"Loading model: {model_name} on device: {self.device}")
-        self.processor = CLIPProcessor.from_pretrained(model_name)
-        self.model = CLIPModel.from_pretrained(model_name)
+        self.processor = CLIPProcessor.from_pretrained(model_name, local_files_only=True)
+        self.model = CLIPModel.from_pretrained(model_name, local_files_only=True)
         self.model.to(self.device)
         self.model.eval()
         self._embedding_dim = self.model.config.projection_dim
@@ -34,7 +34,13 @@ class ModelLoader:
         inputs = self.processor(text=texts, return_tensors="pt", padding=True, truncation=True)
         inputs = {k: v.to(self.device) for k, v in inputs.items()}
         with torch.no_grad():
-            embeddings = self.model.get_text_features(**inputs)
+            output = self.model.get_text_features(**inputs)
+        if hasattr(output, 'pooler_output') and output.pooler_output is not None:
+            embeddings = output.pooler_output
+        elif isinstance(output, torch.Tensor):
+            embeddings = output
+        else:
+            embeddings = output[0]
         embeddings = embeddings / embeddings.norm(dim=-1, keepdim=True)
         return embeddings.cpu().numpy()
 
@@ -43,7 +49,13 @@ class ModelLoader:
         inputs = self.processor(images=images, return_tensors="pt", padding=True)
         inputs = {k: v.to(self.device) for k, v in inputs.items()}
         with torch.no_grad():
-            embeddings = self.model.get_image_features(**inputs)
+            output = self.model.get_image_features(**inputs)
+        if hasattr(output, 'pooler_output') and output.pooler_output is not None:
+            embeddings = output.pooler_output
+        elif isinstance(output, torch.Tensor):
+            embeddings = output
+        else:
+            embeddings = output[0]
         embeddings = embeddings / embeddings.norm(dim=-1, keepdim=True)
         return embeddings.cpu().numpy()
 

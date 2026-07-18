@@ -4,7 +4,7 @@ Run from the backend directory: python -m scripts.build_index
 """
 import sys
 import os
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "backend"))
 
 from app.config import MODEL_NAME, CATALOG_DIR
 from app.core.model_loader import get_model_loader
