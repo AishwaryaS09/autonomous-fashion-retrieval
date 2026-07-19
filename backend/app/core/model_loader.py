@@ -18,8 +18,8 @@ class ModelLoader:
         self.model_name = model_name
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         logger.info(f"Loading model: {model_name} on device: {self.device}")
-        self.processor = CLIPProcessor.from_pretrained(model_name, local_files_only=True)
-        self.model = CLIPModel.from_pretrained(model_name, local_files_only=True)
+        self.processor = CLIPProcessor.from_pretrained(model_name, local_files_only=False)
+        self.model = CLIPModel.from_pretrained(model_name, local_files_only=False)
         self.model.to(self.device)
         self.model.eval()
         self._embedding_dim = self.model.config.projection_dim
