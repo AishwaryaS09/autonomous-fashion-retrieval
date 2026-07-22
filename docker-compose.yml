@@ -26,7 +26,7 @@ services:
     ports:
       - "5173:5173"
     environment:
-      - VITE_API_BASE_URL=http://backend:8000
+      - VITE_API_BASE_URL=https://autonomous-fashion-retrieval.onrender.com
     depends_on:
       - backend
     restart: unless-stopped

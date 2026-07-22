@@ -2,13 +2,90 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #F9F9F9;
+  color: #0D111A;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F9F9F9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ED7BAB;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #E42278;
+}
+
+::selection {
+  background-color: rgba(228, 34, 120, 0.15);
+  color: #0D111A;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #9CA3AF;
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-white font-semibold rounded-2xl px-6
+           transition-all duration-300 ease-out
+           hover:bg-primary-light hover:shadow-glow hover:scale-[1.02]
+           active:scale-[0.98]
+           disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:shadow-none disabled:hover:scale-100;
+  }
+
+  .btn-secondary {
+    @apply bg-surface text-primary-dark font-medium rounded-2xl px-5 py-2.5 border border-primary-lighter/50
+           transition-all duration-200 ease-out
+           hover:bg-primary-lighter/20 hover:border-primary-light
+           active:scale-[0.98];
+  }
+
+  .card {
+    @apply bg-surface rounded-3xl shadow-card
+           transition-all duration-300 ease-out;
+  }
+
+  .card-hover {
+    @apply hover:shadow-card-hover hover:-translate-y-0.5;
+  }
+
+  .input-field {
+    @apply w-full px-5 rounded-2xl border border-gray-200
+           bg-surface text-primary-dark font-sans text-sm
+           outline-none transition-all duration-200
+           focus:border-primary focus:ring-2 focus:ring-primary/10
+           placeholder:text-gray-400;
+  }
+
+  .label-text {
+    @apply block text-[11px] font-semibold text-primary-dark/50 mb-1.5 uppercase tracking-widest;
+  }
 }

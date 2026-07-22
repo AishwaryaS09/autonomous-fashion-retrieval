@@ -1,4 +1,5 @@
 import React, { useRef, useState, useCallback, useEffect } from "react";
+import { motion } from "framer-motion";
 import { CATEGORIES } from "../types/search";
 
 interface SketchCanvasProps {
@@ -79,7 +80,7 @@ const SketchCanvas: React.FC<SketchCanvasProps> = ({ onSearch, loading }) => {
     if (!ctx) return;
     const { x, y } = getPos(e);
     ctx.lineTo(x, y);
-    ctx.strokeStyle = "#000000";
+    ctx.strokeStyle = "#0D111A";
     ctx.lineWidth = brushSize;
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
@@ -129,77 +130,58 @@ const SketchCanvas: React.FC<SketchCanvasProps> = ({ onSearch, loading }) => {
   };
 
   return (
-    <div className="space-y-4">
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Draw your fashion sketch
-        </label>
+    <motion.div
+      className="flex flex-col items-center space-y-5"
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      <div className="w-[80%]">
         <canvas
           ref={canvasRef}
           width={500}
-          height={400}
+          height={360}
           onMouseDown={startDrawing}
           onMouseMove={draw}
           onMouseUp={stopDrawing}
           onMouseLeave={stopDrawing}
-          className="w-full border border-gray-300 rounded-lg cursor-crosshair bg-white touch-none"
-          style={{ maxHeight: "400px" }}
+          className="w-full border-2 border-primary-lighter rounded-2xl cursor-crosshair bg-white touch-none transition-colors duration-200 hover:border-primary-light"
+          style={{ maxHeight: "360px" }}
         />
       </div>
 
-      <div className="flex items-center gap-4">
-        <div className="flex items-center gap-2">
-          <label className="text-sm text-gray-600">Brush:</label>
+      <div className="w-[80%] flex items-center gap-2 flex-wrap">
+        <div className="flex items-center gap-2 bg-surface-muted rounded-xl px-3 py-2">
+          <label className="text-xs text-primary-dark/50 font-medium">Brush</label>
           <input
             type="range"
             min="1"
             max="20"
             value={brushSize}
             onChange={(e) => setBrushSize(Number(e.target.value))}
-            className="w-24"
+            className="w-20 accent-primary"
           />
-          <span className="text-sm text-gray-500">{brushSize}px</span>
+          <span className="text-xs text-primary-dark/40 w-7">{brushSize}px</span>
         </div>
-        <button
-          type="button"
-          onClick={undo}
-          disabled={history.length === 0}
-          className="px-3 py-1 text-sm border border-gray-300 rounded hover:bg-gray-100 disabled:opacity-50"
-        >
+        <button type="button" onClick={undo} disabled={history.length === 0} className="btn-secondary text-xs px-4 py-2">
           Undo
         </button>
-        <button
-          type="button"
-          onClick={clearCanvas}
-          className="px-3 py-1 text-sm border border-gray-300 rounded hover:bg-gray-100"
-        >
+        <button type="button" onClick={clearCanvas} className="btn-secondary text-xs px-4 py-2">
           Clear
         </button>
-        <button
-          type="button"
-          onClick={() => uploadRef.current?.click()}
-          className="px-3 py-1 text-sm border border-gray-300 rounded hover:bg-gray-100"
-        >
-          Upload Sketch
+        <button type="button" onClick={() => uploadRef.current?.click()} className="btn-secondary text-xs px-4 py-2">
+          Upload
         </button>
-        <input
-          ref={uploadRef}
-          type="file"
-          accept="image/*"
-          onChange={handleUpload}
-          className="hidden"
-        />
+        <input ref={uploadRef} type="file" accept="image/*" onChange={handleUpload} className="hidden" />
       </div>
 
-      <div className="flex gap-4">
-        <div className="flex-1">
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Category
-          </label>
+      <div className="w-[80%] flex gap-4">
+        <div className="w-[80%]">
+          <label className="label-text">Category</label>
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fashion-500 focus:border-fashion-500 outline-none"
+            className="input-field h-[50px]"
             disabled={loading}
           >
             {CATEGORIES.map((cat) => (
@@ -209,14 +191,12 @@ const SketchCanvas: React.FC<SketchCanvasProps> = ({ onSearch, loading }) => {
             ))}
           </select>
         </div>
-        <div className="w-32">
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Results
-          </label>
+        <div className="w-[20%]">
+          <label className="label-text">Results</label>
           <select
             value={topK}
             onChange={(e) => setTopK(Number(e.target.value))}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fashion-500 focus:border-fashion-500 outline-none"
+            className="input-field h-[50px]"
             disabled={loading}
           >
             {[5, 10, 20, 50].map((k) => (
@@ -231,11 +211,23 @@ const SketchCanvas: React.FC<SketchCanvasProps> = ({ onSearch, loading }) => {
       <button
         onClick={handleSearch}
         disabled={loading}
-        className="w-full bg-fashion-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-fashion-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+        className="btn-primary w-[80%] h-[55px] flex items-center justify-center gap-2 text-base"
       >
-        {loading ? "Searching..." : "Search by Sketch"}
+        {loading ? (
+          <>
+            <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+            Searching...
+          </>
+        ) : (
+          <>
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+            </svg>
+            Search by Sketch
+          </>
+        )}
       </button>
-    </div>
+    </motion.div>
   );
 };
 

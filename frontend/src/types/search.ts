@@ -5,8 +5,23 @@ export interface SearchProduct {
   image_url: string;
   similarity_score: number;
   reranking_score: number;
+  primary_color: string;
+  secondary_color: string;
   color: string;
   pattern: string;
+  style: string;
+  material: string;
+  fit: string;
+  length: string;
+  sleeve_type: string;
+  neckline: string;
+  footwear_type: string;
+  heel_type: string;
+  bag_type: string;
+  occasion: string;
+  season: string;
+  gender: string;
+  description: string;
 }
 
 export interface SearchResponse {
