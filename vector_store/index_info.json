@@ -1,0 +1,7 @@
+{
+  "embedding_dimension": 512,
+  "num_products": 130,
+  "model_name": "fashion-clip",
+  "index_type": "IndexFlatIP",
+  "status": "ready"
+}
